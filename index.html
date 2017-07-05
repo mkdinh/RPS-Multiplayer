@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+</html>
+	<head>
+		<title>RPS-Multiplayer</title>
+		<link rel="stylesheet" type="text/css" href="assets/css/normalized.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	</head>
+	<body>
+		<!-- Main HTML code goes here -->
+
+  		<!-- Player Selection Modal -->
+		  <div class="modal fade" id="myModal" role="dialog">
+		    <div class="modal-dialog modal-sm">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Welcome to the Rock-Paper-Scissor Game!</h4>
+		        </div>
+	        	<form>
+			        <div class="modal-body">
+			          <div class="form-group">
+						  <label for="usr" id="selectName">Name:</label>
+						  <input type="text" class="form-control" id="usr">
+					  </div>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="submit" class="btn btn-primary" id="submit" data-dismiss="modal">Submit</button>
+			        </div>
+		        </form>
+		      </div>
+		    </div>
+		  </div>
+
+		  <!-- Invite Player Modal -->
+		  <div class="modal fade" id="matchingModal" role="dialog">
+		    <div class="modal-dialog modal-sm">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Looking for 2nd Player</h4>
+		        </div>
+	        	<form>
+			        <div class="modal-body">
+			      		<p id="matchingModalMessage"> Invite your friend to the game!<p>
+			        </div>
+			        <div class="modal-footer">
+			        </div>
+		        </form>
+		      </div>
+		    </div>
+		  </div>
+
+		<div class="jumbotron">
+		  <div class="container">
+		    
+			<div class="row">
+				<div class="col-lg-5" id="player1Container">
+					<p id="player1Name"></p>
+					<div id="player1Choice">
+						<img src="assets/image/rock.png" class="choiceBtn" data-choice="rock">
+						<img src="assets/image/paper.png" class="choiceBtn" data-choice="paper">
+						<img src="assets/image/scissor.png" class="choiceBtn" data-choice="scissors">
+					</div>
+					<div id="playerScore">
+						<div class="col-lg-3">
+							<p class="playerScore">Win:</p>
+							<p class="playerScore">Lose:</p>
+							<p class="playerScore">Tie:</p>
+						</div>
+						<div class="col-lg-7">
+							<p id="player1-Win">0</p>
+							<p id="player1-Lose">0</p>
+							<p id="player1-Tie">0</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-2" id="choiceContainer">
+<!-- 					<button type="submit" class="btn btn-primary" id="submit" data-dismiss="modal">Submit</button> -->
+				</div>
+				<div class="col-lg-5" id="player2Container">
+					<p id="player2Name"></p>
+					<div id="playerChoice">
+						<img src="assets/image/rock.png" class="choiceBtn" data-choice="rock">
+						<img src="assets/image/paper.png" class="choiceBtn" data-choice="paper">
+						<img src="assets/image/scissor.png" class="choiceBtn" data-choice="scissors">
+					</div>
+					<div id="player2Score">
+						<div class="col-lg-3">
+							<p class="playerScore">Win:</p>
+							<p class="playerScore">Lose:</p>
+							<p class="playerScore">Tie:</p>
+						</div>
+						<div class="col-lg-7">
+							<p id="player2-Win">0</p>
+							<p id="player2-Lose">0</p>
+							<p id="player2-Tie">0</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		  </div>
+		</div>
+
+		<!-- Javascript goes here -->
+		<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="assets/javascript/game.js"></script>
+	</body>
+</html>
