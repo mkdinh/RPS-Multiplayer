@@ -12,7 +12,6 @@ messagingSenderId: "326882502844"
 firebase.initializeApp(config);
 
 var database = firebase.database();
-database.ref().set({});
 
 //Variable
 
@@ -171,3 +170,5 @@ function checkChoices(playerChoice,opponentChoice){
 
 	database.ref(player.id+"data").set({player:player})
 }
+
+database.ref(player.id+"data").onDisconnect().remove()
