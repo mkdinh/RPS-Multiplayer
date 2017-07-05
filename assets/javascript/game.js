@@ -113,6 +113,7 @@ $(".choiceBtn").click(function(){
  		})
 	database.ref(opponentDataLocation+"/choice").on('value',function(oppSnapshot){
 	opponentChoice = oppSnapshot.val();
+	if(opponentChoice === null || opponentChoice || undefined){alert("Waiting for opponent to make a move")}
 	})
 })
 
