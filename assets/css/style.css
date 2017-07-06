@@ -5,6 +5,15 @@
 	margin:10px 5px;
 }
 
+#player1Container{
+	border-right: 1px solid grey;
+}
+
+#player2Container{
+	border-left: 1px solid grey;
+}
+
+
 #player1Name,#player2Name{
 	text-align: center;
 	font: bold 30px sans-serif;
@@ -15,7 +24,8 @@
 }
 
 .col-lg-6{
-	text-align: right
+	text-align: right;
+	padding-right:0;
 }
 
 .title{
@@ -39,3 +49,20 @@
 	font-weight:bold;
 	color:grey;
 }
+
+#player1-status,#player2-status{
+	color:green;
+	text-align: center;
+    font: bold 25px sans-serif;
+    padding-top: 20px;
+    height:50px;
+}
+
+#decision{
+	color:black;
+	text-align: center;
+    font: bold 25px sans-serif;
+    padding-top: 20px;
+    height:50px;
+}
+
