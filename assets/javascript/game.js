@@ -124,19 +124,20 @@ database.ref().on("value",function(snapshot){
 $(".choiceBtn").click(function(){
 	database.ref(playerDataLocation).update({choice: $(this).attr("data-choice")})
 
+})
+
+database.ref().on('value',function(ParentSnapshot){
+
 	database.ref(playerDataLocation+"/choice").on('value',function(snapshot){
 		playerChoice = snapshot.val();
 			
  		})
 	database.ref(opponentDataLocation+"/choice").on('value',function(oppSnapshot){
-	opponentChoice = oppSnapshot.val();
+	opponentChoice = oppSnapshot.val();	
 	})
-})
 
-database.ref().on('value',function(ParentSnapshot){
-	if(ParentSnapshot.child(opponentDataLocation+"/choice").exists() && ParentSnapshot.child(playerDataLocation+"/choice").exists() ){
+	if(ParentSnapshot.child(opponentDataLocation+"/choice").exists() && ParentSnapshot.child(playerDataLocation+"/choice").exists() ){	
 		checkChoices(playerChoice,opponentChoice,player)
-		console.log(player.id)
 	}
 	setTimeout(function(){updateGame(ParentSnapshot)},200);
 })

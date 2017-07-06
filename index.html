@@ -3,10 +3,12 @@
 	<head>
 		<title>RPS-Multiplayer</title>
 		<link rel="stylesheet" type="text/css" href="assets/css/normalized.css">
-		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
 		 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
 	</head>
 	<body>
 		<!-- Main HTML code goes here -->
@@ -52,7 +54,7 @@
 		      </div>
 		    </div>
 		  </div>
-
+		<p class="title">ROCK PAPER SCISSORS GAME</p>
 		<div class="jumbotron">
 		  <div class="container">
 		    
@@ -65,12 +67,13 @@
 						<img src="assets/image/scissor.png" class="choiceBtn" data-choice="scissors">
 					</div>
 					<div id="playerScore">
-						<div class="col-lg-3">
+					<hr>
+						<div class="col-lg-6">
 							<p class="playerScore">Win:</p>
 							<p class="playerScore">Lose:</p>
 							<p class="playerScore">Tie:</p>
 						</div>
-						<div class="col-lg-7">
+						<div class="col-lg-4">
 							<p id="player1-Win">0</p>
 							<p id="player1-Lose">0</p>
 							<p id="player1-Tie">0</p>
@@ -82,18 +85,19 @@
 				</div>
 				<div class="col-lg-5" id="player2Container">
 					<p id="player2Name"></p>
-					<div id="playerChoice">
+					<div id="player2Choice">
 						<img src="assets/image/rock.png" class="choiceBtn" data-choice="rock">
 						<img src="assets/image/paper.png" class="choiceBtn" data-choice="paper">
 						<img src="assets/image/scissor.png" class="choiceBtn" data-choice="scissors">
 					</div>
 					<div id="player2Score">
-						<div class="col-lg-3">
+					<hr>
+						<div class="col-lg-6">
 							<p class="playerScore">Win:</p>
 							<p class="playerScore">Lose:</p>
 							<p class="playerScore">Tie:</p>
 						</div>
-						<div class="col-lg-7">
+						<div class="col-lg-4">
 							<p id="player2-Win">0</p>
 							<p id="player2-Lose">0</p>
 							<p id="player2-Tie">0</p>

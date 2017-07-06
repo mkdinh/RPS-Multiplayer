@@ -4,3 +4,38 @@
 	border: 1px solid black;
 	margin:10px 5px;
 }
+
+#player1Name,#player2Name{
+	text-align: center;
+	font: bold 30px sans-serif;
+}
+
+#player1Choice,#player2Choice{
+	text-align: center;
+}
+
+.col-lg-6{
+	text-align: right
+}
+
+.title{
+	font-size: 50px;
+	color:grey;
+	font-family: 'Bungee Shade', cursive;
+	text-align: center
+}
+
+#player1-Win,#player2-Win{
+	font-weight:bold;
+	color:green;
+}
+
+#player1-Lose,#player2-Lose{
+	font-weight:bold;
+	color:red;
+}
+
+#player1-Tie,#player2-Tie{
+	font-weight:bold;
+	color:grey;
+}
