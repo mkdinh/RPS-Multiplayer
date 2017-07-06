@@ -32,6 +32,7 @@ $(window).on('load',function(){
     $('#myModal').modal('show');
 });
 
+
 //Check number of players
 
 
@@ -61,7 +62,13 @@ $("#submit").click(function(event){
 
 			opponentDataLocation = "player2data/"+ opponent;
 
-		}else{
+			database.ref(player.id+"data").onDisconnect().remove(function(){
+				gameReady = false;
+			})
+
+		}
+
+		if(snapshot.child("player1data").exists()){
 			playerName = $("#usr").val().trim();
 			player = {
 				name: playerName,
@@ -77,22 +84,33 @@ $("#submit").click(function(event){
 			opponent = "player"
 			opponentId = "player1"
 			opponentDataLocation = "player1data/"+ opponent;
+
+			database.ref(player.id+"data").onDisconnect().remove(function(){
+				gameReady = false;
+			})
 		}
 	})
 
 })
 
+$(window).on('load',function(){
+    	$('#myModal').modal('show');
+})
 
 database.ref().on("value",function(snapshot){
 	numPlayer = snapshot.numChildren();
-
-	if(numPlayer === 1 && player.id === "player1"){
+	if(numPlayer === 0){
+		$(window).on('load',function(){
+    	$('#myModal').modal('show');
+		});
+	}else if(numPlayer === 1 && player.id === "player1"){
 			$("#matchingModal").modal('show')
 	}else if (numPlayer === 2){
 		gameReady = true;
 		$('#matchingModalMessage').html('Player 2 has entered the game!')
 		setTimeout(function() {$('#matchingModal').modal('hide')}, 2000);
 		setTimeout(function(){			
+			$('#matchingModalMessage').html('Invite your friends to the game!')
 			$("#"+player.id+"Name").html(player.name)
 			database.ref().once("value",function(childSnapshot){
 				var name = childSnapshot.child(opponentDataLocation+"/name").val()
@@ -117,9 +135,10 @@ $(".choiceBtn").click(function(){
 
 database.ref().on('value',function(ParentSnapshot){
 	if(ParentSnapshot.child(opponentDataLocation+"/choice").exists() && ParentSnapshot.child(playerDataLocation+"/choice").exists() ){
-		checkChoices(playerChoice,opponentChoice)
+		checkChoices(playerChoice,opponentChoice,player)
+		console.log(player.id)
 	}
-	setTimeout(function(){updateGame(ParentSnapshot)},500);
+	setTimeout(function(){updateGame(ParentSnapshot)},200);
 })
 
 
@@ -142,26 +161,31 @@ function updateGame(snapshot){
 	}
 }
 
-function checkChoices(playerChoice,opponentChoice){
-	if(playerChoice === opponentChoice && playerChoice !== ""){
-		player.tie++;	
-	}else if(playerChoice === "rock"){
+function checkChoices(playerChoice,opponentChoice,player){
+		
+	if(playerChoice === "rock"){
 		if(opponentChoice === "scissors"){
 			player.win++
 		}else if(opponentChoice === "paper"){
 			player.lose++;
+		}else if(opponentChoice === "rock"){
+			player.tie++;	
 		}
 	}else if(playerChoice === "paper"){
 		if(opponentChoice === "rock"){
 			player.win++
 		}else if(opponentChoice === "scissors"){
 			player.lose++;
+		}else if(opponentChoice === "paper"){
+			player.tie++;	
 		}
 	}else if(playerChoice === "scissors"){
 		if(opponentChoice === "paper"){
 			player.win++;
 		}else if(opponentChoice === "rock"){
 			player.lose++;
+		}else if(opponentChoice === "scissors"){
+			player.tie++;	
 		}
 	}
 
@@ -169,5 +193,3 @@ function checkChoices(playerChoice,opponentChoice){
 
 	database.ref(player.id+"data").set({player:player})
 }
-
-database.ref(player.id+"data").onDisconnect().remove()
