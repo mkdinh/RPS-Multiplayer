@@ -23,6 +23,7 @@ var playerChoice;
 var opponentChoice;
 var playerScore;
 var playerDataLocation;
+var playerMessageData;
 var opponentDataLocation;
 var gameReady;
 var playerName;
@@ -167,7 +168,8 @@ $("#submit").click(function(event){
 			// indexing players data storage location
 			opponentDataLocation = "player2data/player"
 			playerDataLocation = "player1data/player";
-
+			playerMessageData = "player1data/message"
+			opponentMessageData = "player2data/message"
 			// Change css of current player
 			$("#"+player.id+"Container").css("border","3px dashed green")
 			$("#"+player.id+"Name").css("color","green")
@@ -177,6 +179,18 @@ $("#submit").click(function(event){
 				gameReady = false;	
 			})
 
+			//gather message data
+			database.ref(playerMessageData).limitToLast(1).on("child_added",function(DataSnapshot){
+				var message = DataSnapshot.child("message").val()
+				$("#message-display").append(message)
+			},function(errorObject){console.log(errorObject.Code)})
+
+			database.ref(opponentMessageData).limitToLast(1).on("child_added",function(DataSnapshot){
+				var message = DataSnapshot.child("message").val()
+				$("#message-display").append(message)
+			},function(errorObject){console.log(errorObject.Code)})
+
+			//on remove opponent data, reset scores
 			database.ref(opponentId+"data").on("child_removed",function(){
 				gameReady = false;	
 				resetScore(player)
@@ -201,6 +215,8 @@ $("#submit").click(function(event){
 			opponentId = "player1"
 			opponentDataLocation = "player1data/player";
 			playerDataLocation = "player2data/player";
+			playerMessageData = "player2data/message";
+			opponentMessageData = "player1data/message"
 
 			// Change css of current player
 			$("#"+player.id+"Container").css("border","3px dashed green")
@@ -209,6 +225,16 @@ $("#submit").click(function(event){
 			database.ref(player.id+"data").onDisconnect().remove(function(){
 				gameReady = false;
 			})
+
+			database.ref(playerMessageData).limitToLast(1).on("child_added",function(DataSnapshot){
+				var message = DataSnapshot.child("message").val()
+				$("#message-display").append(message)
+			},function(errorObject){console.log(errorObject.Code)})
+
+			database.ref(opponentMessageData).limitToLast(1).on("child_added",function(DataSnapshot){
+				var message = DataSnapshot.child("message").val()
+				$("#message-display").append(message)
+			},function(errorObject){console.log(errorObject.Code)})
 
 			database.ref(opponentId+"data").on("child_removed",function(){
 				gameReady = false;
@@ -280,11 +306,11 @@ database.ref().on('value',function(ParentSnapshot){
 			setTimeout(function(){
 				$("#"+player.id+"-status").empty();
 				$("#"+opponentId+"-status").empty();
-			},500)
+			},1000)
 
 			setTimeout(function(){
 				$("#decision").empty();
-			},1500)
+			},1000)
 	}
 
 	// 	setTimeout(function(){
@@ -301,6 +327,28 @@ database.ref().on('value',function(ParentSnapshot){
 		setTimeout(function(){updateGame(ParentSnapshot)},200);
 	}
 })
+
+
+$("#message-input").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#send").click();
+    }
+});
+
+$("#send").click(function(){
+
+	var message = $("#message-input").val().trim();
+	var messageDiv = {
+		message: "<p><b>"+player.name+":</b> "+ message+"</p>",
+		timeStamp: firebase.database.ServerValue.TIMESTAMP
+		}
+
+	database.ref(playerMessageData).push(messageDiv)
+	$("#message-input").val("")
+
+})
+
+
 
 
 
