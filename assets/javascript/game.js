@@ -197,6 +197,7 @@ $("#submit").click(function(event){
 				database.ref("player1data").set({
 					"player": player,
 				})
+				$("#message-display").empty()
 			})
 		}
 
@@ -243,6 +244,7 @@ $("#submit").click(function(event){
 					"player": player,
 				})
 				$('#matchingModal').modal('show')
+				$('#message-display').empty()
 			})
 
 		}
