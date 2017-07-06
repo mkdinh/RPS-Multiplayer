@@ -137,8 +137,8 @@ $(window).on('load',function(){
 //Create player profile
 $("#submit").click(function(event){
 	event.preventDefault();
-	if($(this).val().trim() === ""){$("#selectName").html("Name cannot be a blank")}
-
+	if($(usr).val().trim() === ""){$("#selectName").html("Name cannot be a blank"); return}
+	else{$('#myModal').modal('hide');}
 	// if there are 2 players, return 
 	if(numPlayer == 2){return}
 
@@ -216,6 +216,7 @@ $("#submit").click(function(event){
 				database.ref("player2data").set({
 					"player": player,
 				})
+				$('#matchingModal').modal('show')
 			})
 
 		}
